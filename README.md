@@ -19,28 +19,6 @@ and other self-studying related materials are crucial for a successful job searc
 
 The app will help job seekers visualize and understand what areas they need to improve and spend more time on. It will also promote organization and time management during the job search. Ultimately, it will provide a better job search experience for those who plan to enter the world of software development.
 
-## Functionality and MVP
-
-* Upon signing up, users will start with threes default categories that cannot be modified and deleted: Leetcode, Cracking the Coding Interview, and Languages/Technologies. Categories that were not completed the day prior will be highlighted to alert users that they need to spend more time on them.
-
-* Users can add, edit, or delete a new Leetcode question. Each question can have multiple attempts that are deletable. Users can time themselves to answer a question and save it as an attempt. They can also set goals that reset daily and can contribute to the total time accumulated.
-
-* Users can add, edit, or delete problems in the book _Cracking the Coding Interview_. Like the Leetcode category, they can time themselves to answer a question and save it as an attempt. They can also set goals that counts towards the time to complete this category per day.
-
-* Users can record their studies on specific languages and technologies. They can keep track of the time they spent on each one and record what part of the language/technology have they done as reports.
-
-* Users can create, modify, and delete custom categories. Not only can they set the name of the category and the task associated with it, they can set goals and time limit for them. They can create up to nine custom categories, excluding the default three.
-
-### Bonus Features
-
-* Keeping track of applications sent and replies. Showing graphs/charts of activity and response:rejection ratio.
-
-* Two more default categories: side projects and mock interviews.
-
-* Mobile friendly.
-
-* Getting it to the App Store.
-
 ## Technologies and Challenges
 
 Sweett's core application is the ability to track time for each task and set goals for each category. Upon logging in/signing up, users are greeted with a dashboard containing three default categories: Leetcode, _Cracking the Coding Interview_, and languages/technologies. Users will have their own set of categories independent of others, including default ones. Users can create, modify, and delete tasks and goals for each category, and time themselves and record them as attempts/reports. Users can create more categories as needed and can visit any one of them at anytime. 
@@ -55,6 +33,55 @@ Each component and collection are designed with modularity and reusability in mi
 * Redux 4.0.5
 * Node.js 8.10.0
 * Heroku
+
+### Route Handling
+
+  * Protected routes limit functionality unless logged in.
+```javascript 
+const App = () => (
+  <div className="app">
+    <NavBarContainer />
+    <Switch>
+      <ProtectedRoute path="/categories/:categoryId" component={CategoryShowContainer} />
+      <ProtectedRoute path="/dashboard" component={DashboardContainer} />
+      <AuthRoute exact path="/" component={SplashContainer} />
+      <Route path="*">
+        <Redirect to="/" />
+      </Route>
+
+    </Switch>
+  </div>
+);
+```
+### Cracking The Coding Interview Category
+
+  * Creates tasks based on the different chapters and sections
+  ```javascript
+  renderCTCISections() {
+        return (
+            <select className="dropdown-list" onChange={this.update("section")}>
+                <option value="">---</option>
+                <option value="1. Chapter 1">Chapter 1</option>
+                <option value="2. Chapter 2">Chapter 2</option>
+                <option value="3. Chapter 3">Chapter 3</option>
+                <option value="4. Chapter 4">Chapter 4</option>
+                <option value="5. Chapter 5">Chapter 5</option>
+                <option value="6. Chapter 6">Chapter 6</option>
+                <option value="7. Chapter 7">Chapter 7</option>
+                <option value="8. Chapter 8">Chapter 8</option>
+                <option value="9. Chapter 9">Chapter 9</option>
+                <option value="10. Chapter 10">Chapter 10</option>
+                <option value="11. Chapter 11">Chapter 11</option>
+                <option value="12. Chapter 12">Chapter 12</option>
+                <option value="13. Chapter 13">Chapter 13</option>
+                <option value="14. Chapter 14">Chapter 14</option>
+                <option value="15. Chapter 15">Chapter 15</option>
+                <option value="16. Chapter 16">Chapter 16</option>
+                <option value="17. Chapter 17">Chapter 17</option>
+            </select>
+        )
+    }
+```
 
 ### Goals Setting
 
@@ -91,6 +118,16 @@ This page shows all of the current user's categories and their time and progress
 ![alt text](https://i.imgur.com/K8MJlMP.png)
 
 Each question/task will have a button to record an entry, as well as to pause, resume, and stop. Each question/task can also be categorized based on section. In this case, questions are categorized by difficulty. Aside from the questions/tasks container, there are two sidebars: one to navigate to other categories and another to handle goals. This interface is used for all categories' show pages.
+
+### Bonus Features
+
+* Keeping track of applications sent and replies. Showing graphs/charts of activity and response:rejection ratio.
+
+* Two more default categories: side projects and mock interviews.
+
+* Mobile friendly.
+
+* Getting it to the App Store.
 
 ## Team Members
 
